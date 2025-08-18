@@ -1,0 +1,11 @@
+flask
+pyresparser
+pdfminer.six
+python-docx
+nltk
+pandas
+sentence-transformers
+llama-cpp-python
+flask
+pdfminer.six
+docx2txt

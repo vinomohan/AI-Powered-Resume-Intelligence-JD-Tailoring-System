@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 1000px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Analysis Results</h1>
+
+        <h2>Parsed Resume Data</h2>
+        <p><strong>Email:</strong> {{ parsed_resume.email or 'Not found' }}</p>
+        <p><strong>Phone:</strong> {{ parsed_resume.phone or 'Not found' }}</p>
+        <p><strong>Skills:</strong> {{ parsed_resume.skills | join(', ') }}</p>
+
+        <h2>Extracted Job Description Skills</h2>
+        {% if jd_skills %}
+            <ul>
+                {% for skill in jd_skills %}
+                    <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No skills extracted from JD.</p>
+        {% endif %}
+
+        <h2>Skill Match Report</h2>
+        <p><strong>Matched Skills:</strong> 
+            {{ skill_comparison['matched_skills'] | join(', ') if skill_comparison['matched_skills'] else 'None' }}
+        </p>
+        <p><strong>Missing Skills:</strong> 
+            {{ skill_comparison['missing_skills'] | join(', ') if skill_comparison['missing_skills'] else 'None' }}
+        </p>
+        <p><strong>Match Percentage:</strong> 
+            {{ "%.2f" % skill_comparison['match_percentage'] }}%
+        </p>
+
+        <h2>LLM Suggestions</h2>
+        {% if suggestions %}
+            <pre>{{ suggestions }}</pre>
+        {% else %}
+            <p>No suggestions generated.</p>
+        {% endif %}
+
+        <h2>Tailored Resume</h2>
+        <pre>{{ tailored_resume }}</pre>
+
+        <h2>AI-Generated Cover Letter</h2>
+        <pre>{{ cover_letter }}</pre>
+        <form method="POST" action="{{ url_for('download_cover_letter') }}">
+            <textarea name="cover_letter_text" style="display:none;">{{ cover_letter }}</textarea>
+            <button type="submit">Download Cover Letter (.txt)</button>
+        </form>
+
+
+
+
+        <a href="{{ url_for('index') }}">Back</a>
+    </div>
+</body>
+</html>
