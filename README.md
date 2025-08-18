@@ -51,7 +51,7 @@ A hands-on **GenAI student project** that leverages **NLP, local LLMs (Mistral 7
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure   
 
 ```plaintext
 resume_ai_app/
@@ -70,3 +70,19 @@ resume_ai_app/
 │   ├── skill_matcher.py
 │   └── llm_feedback.py
 └── README.md
+
+```
+## 💡 Motivation
+
+In a world where recruitment is increasingly automated, keyword-based filters dominate initial screening. But candidates are more than keywords.
+
+This project explores how GenAI can provide real, personalized feedback — turning resumes into narratives that match what the job truly requires. Built with privacy and transparency in mind, this app operates fully offline and can be adapted for students, job platforms, and HR tech prototypes.
+
+## 👨‍🎓 Acknowledgements
+
+This is a student research project and not intended for production use.
+
+Inspired by real-world resume parsing tools and recruiter feedback.
+
+LLM model: Mistral 7B GGUF
+
